@@ -8,11 +8,7 @@ const app = express();
 const port = 3000;
 const EMAIL = process.env.EMAIL;
 
-const corsOptions = {
-    origin: 'http://localhost:4200',
-};
-
-app.use(cors(corsOptions));
+app.use(cors());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
@@ -34,9 +30,9 @@ async function sendEmail(email) {
 
 function mailOptions(email) {
     return {
-        from: email.email,
+        from: EMAIL,
         to: EMAIL,
-        subject: 'Website message from ' + email.firstName + ' ' + email.lastName,
+        subject: `Website message from Name: ${email.firstName} ${email.lastName}, Email: ${email.email}`,
         text: email.message
     };
 }
